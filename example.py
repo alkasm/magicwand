@@ -1,7 +1,7 @@
 import cv2
 from magicwand import SelectionWindow
 
-image = cv2.imread('lane.jpg', 0)
+image = cv2.imread('lane.jpg')
 window = SelectionWindow('Selection Window', image)
 window.show()
 mean, stddev = window.getMeanStdDev()
