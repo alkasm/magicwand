@@ -23,7 +23,7 @@ class SelectionWindow:
         else:
             self._channels = 1
         self._selection = image.copy()
-        self._mask = np.ones((self._h, self._w), dtype=np.uint8)
+        self._mask = 255*np.ones((self._h, self._w), dtype=np.uint8)
         self._applied_mask = image.copy()
         self._curr_display = next(self._displays)
 
