@@ -27,7 +27,7 @@ magicwand.py   Main module containing the SelectionWindow class
 There are some internal ("private") methods to run the selection task and modify the displayed image, and there are some public methods implemented in `magicwand.py` which can help get some information about the accepted selection:  
 
 ```python
-mini, maxi = getMinMax()          # returns the min and max color inside the selection
+mini, maxi = getMinMax()        # returns the min and max color inside the selection
 mean, stddev = getMeanStdDev()  # returns the mean and standard deviation of color inside the selection
 ```
 
