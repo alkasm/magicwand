@@ -15,7 +15,7 @@ window.show()
 
 ## files
 
-```python
+```
 example.py     An example script showing usage of the module magicwand.py
 lane.jpg       An example image for the example script
 LICENSE.txt    MIT license
