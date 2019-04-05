@@ -16,10 +16,12 @@ window.show()
 ## files
 
 ```
-example.py     An example script showing usage of the module magicwand.py
-lane.jpg       An example image for the example script
-LICENSE.txt    MIT license
-magicwand.py   Main module containing the SelectionWindow class
+.gitignore    ...
+example.py    example script showing usage of the module magicwand.py
+lane.jpg      example image for the example script
+LICENSE.txt   MIT license
+magicwand.py  main module containing the SelectionWindow class
+README.md     this file
 ```
 
 ## methods
