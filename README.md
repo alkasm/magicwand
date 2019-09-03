@@ -4,7 +4,7 @@ Flood filling masking tool.
 
 Displays an image with a tolerance trackbar. A user can click anywhere on the image to seed a selection, where the range of allowable deviation from a color is given by the trackbar value. The mean and standard deviation of the selected region is displayed in the window's status bar.
 
-![Example Image][readme-example.png]
+![Example Image](readme-example.png)
 
 ## Getting Started
 
