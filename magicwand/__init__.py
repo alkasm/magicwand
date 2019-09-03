@@ -73,9 +73,9 @@ class SelectionWindow:
         viz = cv.addWeighted(self.img, 0.75, viz, 0.25, 0)
         viz = cv.drawContours(viz, contours, -1, color=(255,) * 3, thickness=1)
 
-        mean, stddev = cv.meanStdDev(self.img, mask=self.mask)
-        meanstr = "mean=({:.2f}, {:.2f}, {:.2f})".format(*mean[:, 0])
-        stdstr = "std=({:.2f}, {:.2f}, {:.2f})".format(*stddev[:, 0])
+        self.mean, self.stddev = cv.meanStdDev(self.img, mask=self.mask)
+        meanstr = "mean=({:.2f}, {:.2f}, {:.2f})".format(*self.mean[:, 0])
+        stdstr = "std=({:.2f}, {:.2f}, {:.2f})".format(*self.stddev[:, 0])
         cv.imshow(self.name, viz)
         cv.displayStatusBar(self.name, ", ".join((meanstr, stdstr)))
 
@@ -88,8 +88,3 @@ class SelectionWindow:
             if k in (ord("q"), ord("\x1b")):
                 cv.destroyWindow(self.name)
                 break
-
-
-img = cv.imread("../lane.jpg")
-window = SelectionWindow(img, name="Magic Wand Selector")
-window.show()

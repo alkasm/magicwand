@@ -1,40 +1,62 @@
 ## magicwand
-A Python+OpenCV implementation similar to Adobe Photoshop's magic wand selection tool.
 
-Displays an image with a tolerance trackbar. A user can click anywhere on the image to select a region with similar colors, where the range of allowable deviation from a color is given by the trackbar value.
+Flood filling masking tool.
 
-## usage
+Displays an image with a tolerance trackbar. A user can click anywhere on the image to seed a selection, where the range of allowable deviation from a color is given by the trackbar value. The mean and standard deviation of the selected region is displayed in the window's status bar.
+
+![Example Image][readme-example.png]
+
+## Getting Started
+
+Install into a Python virtual environment, as you would any other Python project.
+
+```sh
+$ python3 -m venv venv
+$ source venv/bin/activate
+(venv) $ pip install git+https://github.com/alkasm/magicwand
+```
+
+Run the module as a script on any image you want:
+
+```sh
+(venv) $ python3 -m magicwand path/to/image.png
+```
+
+## Usage
+
+As a script, just run the module directly as above. You can always check the `--help` flag when running the module as a script for more info:
+
+```sh
+(venv) $ python3 -m magicwand --help
+usage: magic wand selector [-h] image
+
+positional arguments:
+  image       path to image
+
+optional arguments:
+  -h, --help  show this help message and exit
+```
+
+Use inside your own Python projects:
 
 ```python
-import cv2
-from magicwand import SelectionWindow
-image = cv2.imread('lane.jpg', 0)
-window = SelectionWindow('Selection Window', image)
-window.show()
+>>> from magicwand import SelectionWindow
+>>> import cv2 as cv
+>>> 
+>>> img = cv.imread("lane.jpg")
+>>> window = SelectionWindow(img)
+>>> window.show()
+>>> 
+>>> print(f"Selection mean: {window.mean[:, 0]}.")
+Selection mean: [106.76420172  93.78792503  89.71121334].
 ```
 
-## files
-
-```
-.gitignore    ...
-example.py    example script showing usage of the module magicwand.py
-lane.jpg      example image for the example script
-LICENSE.txt   MIT license
-magicwand.py  main module containing the SelectionWindow class
-README.md     this file
-```
-
-## methods
-
-There are some internal ("private") methods to run the selection task and modify the displayed image, and there are some public methods implemented in `magicwand.py` which can help get some information about the accepted selection:  
+The window object has a few properties you might be interested in after successfully filtering your image:
 
 ```python
-mini, maxi = getMinMax()        # returns the min and max color inside the selection
-mean, stddev = getMeanStdDev()  # returns the mean and standard deviation of color inside the selection
+>>> window.mean     # average value for each channel - from cv.meanStdDev(img, mask)
+>>> window.stddev   # standard deviation for each channel - from cv.meanStdDev(img, mask)
+>>> window.mask     # mask from cv.floodFill()
+>>> window.img      # image input into the window
+>>> window.seed     # most recent seed point for cv.floodFill()
 ```
-
-Both functions return two 3-vector numpy arrays if the image is 3-channel, otherwise they return two single values.
-
-## future
-
-In the future, support will be added to add to the current selection, and maybe subtract as well. Allowing the change of colorspaces may be helpful, but will only make sense if each channel will have their own sliders; having a range of hue values the the same range of saturation values doesn't really make sense otherwise. I may build out the `SelectionWindow` class to a more general `ImageWindow` class to make it easier for people to add trackbars and mouseclick events and listen to them.

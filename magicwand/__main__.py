@@ -15,9 +15,10 @@ if __name__ == "__main__":
     window = SelectionWindow(img, "Magic Wand Selector")
 
     print("Click to seed a selection.")
-    print("[shift] adds to a selection.")
-    print("[alt] subtracts from a selection.")
-    print("[shift] + [alt] intersects the selections.")
+    print(" * [SHIFT] adds to the selection.")
+    print(" * [ALT] subtracts from the selection.")
+    print(" * [SHIFT] + [ALT] intersects the selections.")
+    print()
 
     window.show()
     cv.destroyAllWindows()
